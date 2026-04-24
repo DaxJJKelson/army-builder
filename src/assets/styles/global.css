@@ -60,3 +60,15 @@ body {
   margin-bottom: 10px;
   border-radius: 6px;
 }
+
+.unit-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+.unit-card:hover {
+  background-color: #f8f8f8;
+}

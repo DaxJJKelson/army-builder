@@ -29,6 +29,15 @@ function BuildRoster() {
       return [...prev, unit];
     });
   };
+  const removeSelectedUnits = () => {
+    setRoster((prev) =>
+      prev.filter(
+        (unit) => !selectedUnits.some((selected) => selected.id === unit.id),
+      ),
+    );
+
+    setSelectedUnits([]);
+  };
 
   const selectedTotal = selectedUnits.reduce(
     (sum, unit) => sum + unit.points,
@@ -70,9 +79,24 @@ function BuildRoster() {
       <div className="roster-column">
         <PointsTracker totalPoints={totalPoints} maxPoints={maxPoints} />
 
+        {selectedUnits.length > 0 && (
+          <button
+            onClick={removeSelectedUnits}
+            style={{
+              marginBottom: "10px",
+              backgroundColor: "#d9534f",
+              color: "white",
+              border: "none",
+              padding: "8px 12px",
+              cursor: "pointer",
+            }}
+          >
+            Remove Selected Units
+          </button>
+        )}
+
         <RosterList
           roster={roster}
-          removeFromRoster={removeFromRoster}
           toggleSelection={toggleSelection}
           selectedUnits={selectedUnits}
         />

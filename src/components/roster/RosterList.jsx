@@ -1,9 +1,4 @@
-function RosterList({
-  roster,
-  removeFromRoster,
-  toggleSelection,
-  selectedUnits,
-}) {
+function RosterList({ roster, toggleSelection, selectedUnits }) {
   if (roster.length === 0) {
     return <p>No units in roster yet.</p>;
   }
@@ -24,15 +19,6 @@ function RosterList({
         >
           <h4>{unit.name}</h4>
           <p>{unit.points} pts</p>
-
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              removeFromRoster(unit.id);
-            }}
-          >
-            Remove
-          </button>
         </div>
       ))}
     </div>
