@@ -20,10 +20,12 @@ function BuildRoster() {
 
   const toggleSelection = (unit) => {
     setSelectedUnits((prev) => {
-      const alreadySelected = prev.find((u) => u.id === unit.id);
+      const alreadySelected = prev.find(
+        (u) => u.rosterInstanceId === unit.rosterInstanceId,
+      );
 
       if (alreadySelected) {
-        return prev.filter((u) => u.id !== unit.id);
+        return prev.filter((u) => u.rosterInstanceId !== unit.rosterInstanceId);
       }
 
       return [...prev, unit];
@@ -32,7 +34,10 @@ function BuildRoster() {
   const removeSelectedUnits = () => {
     setRoster((prev) =>
       prev.filter(
-        (unit) => !selectedUnits.some((selected) => selected.id === unit.id),
+        (unit) =>
+          !selectedUnits.some(
+            (selected) => selected.rosterInstanceId === unit.rosterInstanceId,
+          ),
       ),
     );
 
@@ -45,7 +50,12 @@ function BuildRoster() {
   );
 
   const addToRoster = (unit) => {
-    setRoster((prev) => [...prev, unit]);
+    const rosterUnit = {
+      ...unit,
+      rosterInstanceId: crypto.randomUUID(),
+    };
+
+    setRoster((prev) => [...prev, rosterUnit]);
   };
 
   const removeFromRoster = (id) => {

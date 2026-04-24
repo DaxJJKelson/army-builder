@@ -3,16 +3,19 @@ function RosterList({ roster, toggleSelection, selectedUnits }) {
     return <p>No units in roster yet.</p>;
   }
 
-  const isSelected = (id) => selectedUnits.some((u) => u.id === id);
+  const isSelected = (instanceId) =>
+    selectedUnits.some((u) => u.rosterInstanceId === instanceId);
 
   return (
     <div>
       {roster.map((unit) => (
         <div
-          key={unit.id}
+          key={unit.rosterInstanceId}
           className="unit-card"
           style={{
-            backgroundColor: isSelected(unit.id) ? "#ffe08a" : "white",
+            backgroundColor: isSelected(unit.rosterInstanceId)
+              ? "#ffe08a"
+              : "white",
             cursor: "pointer",
           }}
           onClick={() => toggleSelection(unit)}
